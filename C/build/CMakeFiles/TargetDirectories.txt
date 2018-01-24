@@ -1,0 +1,6 @@
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/build/CMakeFiles/GKLS.dir
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/build/CMakeFiles/edit_cache.dir
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/build/CMakeFiles/rnd_gen.dir
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/build/CMakeFiles/rebuild_cache.dir
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/build/CMakeFiles/gkls.dir
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/build/CMakeFiles/fnc.dir

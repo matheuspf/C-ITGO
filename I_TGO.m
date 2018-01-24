@@ -38,15 +38,21 @@ classdef I_TGO < handle
 		maxFEs
 
 
+		xVal
+
+
 	end
 
 	methods
 
-		function obj = I_TGO(func, popSizes, K, prob, phi, maxFEs, matR, posR)
+		function obj = I_TGO(func, popSizes, K, prob, phi, maxFEs, matR, posR, xVal)
 
 			if nargin < 8
 				posR = 1;
 			end
+
+			obj.xVal = xVal;
+
 
 			obj.matR = matR;
 
@@ -103,7 +109,7 @@ classdef I_TGO < handle
 
 				%pop.push_back(pop.lBound + rand(obj.N, 1).* (pop.uBound - pop.lBound), obj.func, i);
 
-
+			
 				pop.push_back(pop.lBound + obj.matR(obj.posR, :)'.* (pop.uBound - pop.lBound), obj.func, i);
 				obj.posR = mod(obj.posR + 1, size(obj.matR, 1));
 
@@ -118,7 +124,6 @@ classdef I_TGO < handle
 				pop.push_back(newElem, obj.func, i);
 				%}
 			end
-
 		end
 
 
@@ -184,10 +189,15 @@ classdef I_TGO < handle
 			%r = (obj.bestV == 0.0) && (abs(obj.bestF - 5885.33277) < 1e-4);
 
 			%MD
-			r = (obj.bestV == 0.0) && (abs(obj.bestF - 0.313656) < 1e-5);
+			%r = (obj.bestV == 0.0) && (abs(obj.bestF - 0.313656) < 1e-5);
 
 			%GT
 			%r = (obj.bestV == 0.0) && (obj.bestF < 1e-10);
+
+			%GKLS
+			%r = (abs(obj.bestF + 1.0) < 1e-6);
+			r = norm(obj.best - obj.xVal) < 1e-7;
+
 		end
 
 
@@ -312,7 +322,7 @@ classdef I_TGO < handle
 		function [ret retF retV FEs] = exec(obj)
 
 			for iter = 1:obj.maxIter
-
+				
 				tPts = 0;
 				obj.initialize();
 
@@ -346,11 +356,11 @@ classdef I_TGO < handle
 				bestElems = obj.sortBestElems();
 
 				maxElem = 5;
-
-
+			
+				
 				for i = 1:min(size(bestElems, 1), maxElem)
 
-					[bestElems(i, :) ff vv] = LocalSearch(obj.func, bestElems(i, :), 100);
+					[bestElems(i, :) ff vv] = LocalSearch_Unc(obj.func, bestElems(i, :), 10);
 
 					if (obj.isBest(ff, vv, obj.bestF, obj.bestV) == true) || (ff < obj.bestF) %|| rand(1, 1) < 0.1
 
@@ -371,7 +381,7 @@ classdef I_TGO < handle
 
 						aux = [];
 
-						[bestElems(i, :) ff vv] = LocalSearch(obj.func, bestElems(i, :), 200);
+						[bestElems(i, :) ff vv] = LocalSearch_Unc(obj.func, bestElems(i, :), 20);
 						
 						[obj.best obj.bestF obj.bestV] = obj.bestOf(bestElems(i, :), ff, vv, obj.best, obj.bestF, obj.bestV);
 					end
@@ -391,7 +401,7 @@ classdef I_TGO < handle
 
 				%disp(obj.best);
 				%disp(' ');
-				disp(sprintf('%0.20e      %0.20e       %d \n\n', obj.bestF, obj.bestV, obj.func.FEs));
+				%disp(sprintf('%0.20e      %0.20e      %0.20e       %d \n\n', norm(obj.best - obj.xVal), obj.bestF, obj.bestV, obj.func.FEs));
 
 			end
 

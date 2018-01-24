@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/Src/gkls.c
+gkls.h
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/Src/gkls.h
+rnd_gen.h
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/Src/rnd_gen.h
+math.h
+-
+stdlib.h
+-
+malloc.h
+-
+
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/Src/gkls.h
+
+/home/matheus/Algoritmos/testes/GKLS/C/Dp/Src/rnd_gen.h
+

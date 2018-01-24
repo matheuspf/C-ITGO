@@ -1,0 +1,13 @@
+Gradients and Hessian matrix at the point with coordinates:
+   x = ( 0.000000 0.000000 )
+
+
+Vector of gradient of the D-type function number 2:
+  grad D(x) = ( 0.649717 0.043772 )
+
+Vector of gradient of the D2-type function number 2:
+  grad D2(x) = ( 0.649717 0.043772 )
+
+Hessian matrix of the D2-type function number 2:
+ 2.000000  0.000000 
+ 0.000000  2.000000 

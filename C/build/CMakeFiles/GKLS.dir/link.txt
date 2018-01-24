@@ -1,0 +1,1 @@
+/usr/bin/cc  -fPIC  -fPIC  -shared -Wl,-soname,libGKLS.so -o libGKLS.so CMakeFiles/rnd_gen.dir/Src/rnd_gen.c.o CMakeFiles/fnc.dir/Src/fnc.c.o CMakeFiles/gkls.dir/Src/gkls.c.o 

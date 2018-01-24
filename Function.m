@@ -42,8 +42,10 @@ classdef Function < handle
 
 
 		function [ff vv] = funcLog(obj, x)
+			
+			ff = funcs(x);
+			%ff = obj.func(x);
 
-			ff = obj.func(x);
 
 			if nargout > 1
 
@@ -54,8 +56,19 @@ classdef Function < handle
 
 				vv = sum(g) + sum(h);
 			end
-
+		
 			
+			obj.FEs = obj.FEs + 1;
+
+			if obj.FEs >= obj.maxFEs
+				throw(causeException);
+			end
+		end
+
+		function [ff gg] = funcGrad(obj, x)
+
+			[ff, gg] = funcs(x);
+
 			obj.FEs = obj.FEs + 1;
 
 			if obj.FEs >= obj.maxFEs
@@ -83,7 +96,7 @@ classdef Function < handle
 
 
 		function [ff vv] = eval(obj, x)
-
+			
 			if size(x, 2) > size(x, 1)
 				x = x';
 			end
